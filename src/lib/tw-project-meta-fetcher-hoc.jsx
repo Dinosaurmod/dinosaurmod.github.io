@@ -196,12 +196,14 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
             instructions,
             credits
         })),
-        onSetExtraProjectInfo: (accepted, isRemix, remixId, tooLarge, author) => dispatch(setExtraProjectInfo({
+        onSetExtraProjectInfo: (accepted, isRemix, remixId, tooLarge, author, releaseDate, isUpdated) => dispatch(setExtraProjectInfo({
             accepted,
             isRemix,
             remixId,
             tooLarge,
-            author
+            author,
+            releaseDate,
+            isUpdated
         })),
         onSetRemixedProjectInfo: (loaded, name, author) => dispatch(setRemixedProjectInfo({
             loaded,

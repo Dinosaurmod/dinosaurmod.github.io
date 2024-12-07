@@ -17,10 +17,10 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { FormattedMessage, defineMessages, injectIntl, intlShape } from 'react-intl';
-import { getIsLoading } from '../reducers/project-state.js';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {FormattedMessage, defineMessages, injectIntl, intlShape} from 'react-intl';
+import {getIsLoading} from '../reducers/project-state.js';
 import DOMElementRenderer from '../containers/dom-element-renderer.jsx';
 import AppStateHOC from '../lib/app-state-hoc.jsx';
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
@@ -41,7 +41,7 @@ import BrowserModal from '../components/browser-modal/browser-modal.jsx';
 import CloudVariableBadge from '../containers/tw-cloud-variable-badge.jsx';
 import {isBrowserSupported} from '../lib/tw-environment-support-prober';
 import AddonChannels from '../addons/channels';
-import { loadServiceWorker } from './load-service-worker';
+import {loadServiceWorker} from './load-service-worker';
 import runAddons from '../addons/entry';
 
 import styles from './interface.css';
@@ -277,6 +277,11 @@ class Interface extends React.Component {
             document.title = `${title} - DinosaurMod`;
         }
     }
+    copyProjectLink (id) {
+        if ('clipboard' in navigator && 'writeText' in navigator.clipboard) {
+            navigator.clipboard.writeText(`https://projects.penguinmod.com/${id}`);
+        }
+    }
     render() {
         const {
             /* eslint-disable no-unused-vars */
@@ -484,6 +489,7 @@ class Interface extends React.Component {
                             <a
                                 target="_blank"
                                 href="https://penguinmod.com/search?q=all:projects"
+                                rel="noreferrer"
                             >
                                 See more projects
                             </a>

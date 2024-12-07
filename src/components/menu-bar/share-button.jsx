@@ -28,12 +28,12 @@ const getProjectUri = () => new Promise(resolve => {
 const isUploadAvailable = async () => {
     let res = null;
     try {
-        res = await fetch('https://projects.penguinmod.com/api');
+        res = await fetch('https://projects.penguinmod.com/api/v1/projects/canuploadprojects').then(res => res.json());
     } catch {
         // failed to fetch entirely
         return false;
     }
-    return res.ok;
+    return res.canUpload;
 };
 
 class ShareButton extends React.Component {
@@ -131,17 +131,30 @@ class ShareButton extends React.Component {
                 return;
             }
 
+            const isEdit = this.props.usernameLoggedIn
+                && this.props.extraProjectInfo?.author === this.props.username;
+
+            let editPiece = '';
             let remixPiece = '';
-            if (location.hash.includes('#')) {
-                const id = location.hash.replace('#', '');
+            const id = location.hash.replace('#', '');
+            if (this.props.extraProjectInfo?.isRemix) {
                 remixPiece = `&remix=${id}`;
             }
 
+            let targetPage = 'upload';
+            if (isEdit) {
+                targetPage = 'edit';
+                editPiece = `&id=${id}`;
+            }
+
             const url = location.origin;
-            window.open(`https://penguinmod.com/upload?name=${this.props.projectTitle}${remixPiece}&external=${url}`, '_blank');
+            window.open(`https://penguinmod.com/${targetPage}?name=${this.props.projectTitle}${editPiece}${remixPiece}&external=${url}`, '_blank');
         });
     }
     render() {
+        const isRemix = this.props.extraProjectInfo?.isRemix;
+        const isEdit = this.props.usernameLoggedIn
+            && this.props.extraProjectInfo?.author === this.props.username;
         return (
             <Button
                 className={classNames(
@@ -153,17 +166,22 @@ class ShareButton extends React.Component {
                 onClick={this.onUploadProject}
             >
                 <div className={classNames(styles.shareContent)}>
-                    {window.location.hash.includes('#') ?
-                        <FormattedMessage
-                            defaultMessage="Remix"
-                            description="Menu bar item for remixing"
-                            id="gui.menuBar.remix"
+                    {isEdit ? <FormattedMessage
+                            defaultMessage="Upload Edits"
+                            description="Text for uploading edits for projects on PenguinMod"
+                            id="gui.menuBar.pmedit"
                         /> :
-                        <FormattedMessage
-                            defaultMessage="Upload to PM"
-                            description="Label for project share button"
-                            id="gui.menuBar.pmshare"
-                        />}
+                        (isRemix ?
+                            <FormattedMessage
+                                defaultMessage="Remix"
+                                description="Menu bar item for remixing"
+                                id="gui.menuBar.remix"
+                            /> :
+                            <FormattedMessage
+                                defaultMessage="Upload to PM"
+                                description="Label for project share button"
+                                id="gui.menuBar.pmshare"
+                            />)}
                     {this.state.loading ? (
                         <img
                             className={classNames(styles.icon)}
@@ -182,11 +200,25 @@ class ShareButton extends React.Component {
 ShareButton.propTypes = {
     className: PropTypes.string,
     isShared: PropTypes.bool,
-    projectTitle: PropTypes.string
+    projectTitle: PropTypes.string,
+    extraProjectInfo: PropTypes.shape({
+        accepted: PropTypes.bool,
+        isRemix: PropTypes.bool,
+        remixId: PropTypes.number,
+        tooLarge: PropTypes.bool,
+        author: PropTypes.string,
+        releaseDate: PropTypes.shape(Date),
+        isUpdated: PropTypes.bool
+    }),
+    username: PropTypes.string,
+    usernameLoggedIn: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-    projectTitle: state.scratchGui.projectTitle
+    projectTitle: state.scratchGui.projectTitle,
+    extraProjectInfo: state.scratchGui.tw.extraProjectInfo,
+    username: state.scratchGui.tw.username,
+    usernameLoggedIn: state.scratchGui.tw.usernameLoggedIn
 });
 
 // eslint-disable-next-line no-unused-vars
