@@ -3,6 +3,12 @@ import PropTypes from 'prop-types';
 import { intlShape, injectIntl } from 'react-intl';
 import bindAll from 'lodash.bindall';
 import { connect } from 'react-redux';
+import protobufBundle from './project.protobuf.json';
+import protobuf from 'protobufjs';
+import JSZip from 'jszip';
+
+let protoRoot = protobuf.Root.fromJSON(protobufBundle);
+let Project = protoRoot.lookupType('project.Project');
 
 import { setProjectUnchanged } from '../reducers/project-changed';
 import {
@@ -42,7 +48,7 @@ const fetchProjectToken = projectId => {
     if (hashParams.has('token')) {
         return Promise.resolve(hashParams.get('token'));
     }
-    return fetch(`https://projects.penguinmod.com/api/projects/getPublished?id=${projectId}`)
+    return fetch(`https://projects.penguinmod.com/api/v1/projects/getproject?projectID=${projectId}&requestType=metadata`)
         .then(r => {
             if (!r.ok) return null;
             return r.json();
@@ -56,6 +62,170 @@ const fetchProjectToken = projectId => {
             return null;
         });
 };
+
+function protobufToJson(buffer) {
+    const message = Project.decode(buffer);
+    const json = Project.toObject(message);
+
+    const newJson = {
+        targets: [],
+        monitors: [],
+        extensionData: {},
+        extensions: json.extensions,
+        extensionURLs: {},
+        meta: {
+            semver: json.metaSemver,
+            vm: json.metaVm,
+            agent: json.metaAgent || ""
+        },
+        customFonts: json.fonts
+    };
+
+    for (const target of json.targets) {
+        let newTarget = {
+            isStage: target.isStage || false,
+            name: target.name,
+            variables: {},
+            lists: {},
+            broadcasts: {},
+            customVars: [],
+            blocks: {},
+            comments: {},
+            currentCostume: target.currentCostume,
+            costumes: [],
+            sounds: [],
+            id: target.id,
+            volume: target.volume,
+            layerOrder: target.layerOrder,
+            tempo: target.tempo,
+            videoTransparency: target.videoTransparency,
+            videoState: target.videoState,
+            textToSpeechLanguage: target.textToSpeechLanguage || null,
+            visible: target.visible,
+            x: target.x,
+            y: target.y,
+            size: target.size,
+            direction: target.direction,
+            draggable: target.draggable,
+            rotationStyle: target.rotationStyle
+        };
+
+        if (newTarget.isStage) {
+            delete newTarget.visible, delete newTarget.size, delete newTarget.direction, delete newTarget.draggable, delete newTarget.rotationStyle;
+        }
+
+        for (const variable in target.variables) {
+            newTarget.variables[variable] = [target.variables[variable].name, target.variables[variable].value];
+        }
+
+        for (const list in target.lists) {
+            newTarget.lists[list] = [target.lists[list].name, target.lists[list].value || []];
+        }
+
+        for (const broadcast in target.broadcasts) {
+            newTarget.broadcasts[broadcast] = target.broadcasts[broadcast];
+        }
+
+        for (const customVar in target.customVars) {
+            newTarget.customVars.push(target.customVars[customVar]);
+        }
+
+        for (const block in target.blocks) {
+            if (target.blocks[block].is_variable_reporter) {
+                newTarget.blocks[block] = [
+                    target.blocks[block].varReporterBlock.first_num,
+                    target.blocks[block].varReporterBlock.name,
+                    target.blocks[block].varReporterBlock.id,
+                    target.blocks[block].varReporterBlock.second_num,
+                    target.blocks[block].varReporterBlock.third_num,
+                ]
+                continue;
+            }
+
+            newTarget.blocks[block] = {
+                opcode: target.blocks[block].opcode,
+                next: target.blocks[block].next || null,
+                parent: target.blocks[block].parent || null,
+                inputs: {},
+                fields: {},
+                shadow: target.blocks[block].shadow,
+                topLevel: target.blocks[block].topLevel,
+                x: target.blocks[block].x,
+                y: target.blocks[block].y
+            }
+
+            if (target.blocks[block].mutation) {
+                newTarget.blocks[block].mutation = {
+                    tagName: target.blocks[block].mutation.tagName,
+                    proccode: target.blocks[block].mutation.proccode,
+                    argumentids: target.blocks[block].mutation.argumentids,
+                    argumentnames: target.blocks[block].mutation.argumentnames,
+                    argumentdefaults: target.blocks[block].mutation.argumentdefaults,
+                    warp: target.blocks[block].mutation.warp,
+                    returns: target.blocks[block].mutation._returns,
+                    edited: target.blocks[block].mutation.edited,
+                    optype: target.blocks[block].mutation.optype,
+                    color: target.blocks[block].mutation.color,
+                    hasnext: target.blocks[block].next ? true : false,
+                    children: []
+                }
+            }
+
+            for (const input in target.blocks[block].inputs) {
+                newTarget.blocks[block].inputs[input] = JSON.parse(target.blocks[block].inputs[input]);
+            }
+
+            for (const field in target.blocks[block].fields) {
+                newTarget.blocks[block].fields[field] = JSON.parse(target.blocks[block].fields[field]);
+            }
+        }
+
+        for (const comment in target.comments) {
+            newTarget.comments[comment] = target.comments[comment];
+        }
+
+        for (const costume in target.costumes) {
+            newTarget.costumes[costume] = target.costumes[costume];
+        }
+
+        for (const sound in target.sounds) {
+            newTarget.sounds[sound] = target.sounds[sound];
+        }
+
+        newJson.targets.push(newTarget);
+    }
+
+    for (const monitor in json.monitors) {
+        let newMonitor = {
+            id: json.monitors[monitor].id,
+            mode: json.monitors[monitor].mode,
+            opcode: json.monitors[monitor].opcode,
+            params: json.monitors[monitor].params,
+            spriteName: json.monitors[monitor].spriteName || null,
+            value: json.monitors[monitor].value,
+            width: json.monitors[monitor].width,
+            height: json.monitors[monitor].height,
+            x: json.monitors[monitor].x,
+            y: json.monitors[monitor].y,
+            visible: json.monitors[monitor].visible,
+            sliderMin: json.monitors[monitor].sliderMin,
+            sliderMax: json.monitors[monitor].sliderMax,
+            isDiscrete: json.monitors[monitor].isDiscrete
+        }
+
+        newJson.monitors.push(newMonitor);
+    }
+
+    for (const extensionData in json.extensionData) {
+        newJson.extensionData[extensionData] = json.extensionData[extensionData];
+    }
+
+    for (const extensionURL in json.extensionURLs) {
+        newJson.extensionURLs[extensionURL] = json.extensionURLs[extensionURL];
+    }
+
+    return newJson;
+}
 
 /* Higher Order Component to provide behavior for loading projects by id. If
  * there's no id, the default project is loaded.
@@ -136,14 +306,28 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                     storage.setProjectToken(projectId);
                     assetPromise = storage.load(storage.AssetType.Project, projectId, storage.DataFormat.JSON);
                 } else {
-                    projectUrl = `https://projects.penguinmod.com/api/projects/getPublished?type=file&id=${projectId}`
+                    projectUrl = `https://projects.penguinmod.com/api/v1/projects/getprojectwrapper?safe=true&projectId=${projectId}`
                     assetPromise = progressMonitor.fetchWithProgress(projectUrl)
-                        .then(r => {
+                        .then(async r => {
                             this.props.vm.runtime.renderer.setPrivateSkinAccess(false);
                             if (!r.ok) {
                                 throw new Error(`Request returned status ${r.status}`);
                             }
-                            return r.arrayBuffer();
+                            const project = await r.json();
+
+                            const json = protobufToJson(new Uint8Array(project.project.data));
+
+                            // now get the assets
+                            let zip = new JSZip();
+                            zip.file("project.json", JSON.stringify(json));
+
+                            for (const asset of project.assets) {
+                                zip.file(asset.id, new Uint8Array(asset.buffer.data).buffer);
+                            }
+
+                            const arrayBuffer = await zip.generateAsync({ type: "arraybuffer" });
+
+                            return arrayBuffer
                         })
                         .then(buffer => ({ data: buffer }))
                         .catch(error => {

@@ -399,6 +399,16 @@ const menuItems = [
         featured: true
     },
     {
+        name: 'Zip',
+        extensionId: 'https://extensions.turbowarp.org/CST1229/zip.js',
+        iconURL: 'https://extensions.turbowarp.org/images/CST1229/zip.svg',
+        insetIconURL: turbowarpIcon,
+        tags: ['turbowarp', 'datamgmt'],
+        description: 'Create and edit .zip format files, including .sb3 files.',
+        twDeveloper: 'CST1229',
+        featured: true
+    },
+    {
         name: 'Streamilator',
         extensionId: 'https://streamilator.github.io/Streamilator/extension.js',
         twDeveloper: 'mdwalters',
@@ -507,6 +517,15 @@ const menuItems = [
         featured: true
     },
     {
+        name: 'Tune Shark V3',
+        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Tune-Shark-V3.js',
+        iconURL: 'https://studio.penguinmod.com/static/assets/ad2841e0f0228e47e911a5b571480f7c.svg',
+        tags: ['penguinmod', 'categoryexpansion', 'noisemaker'],
+        description: 'Advanced audio engine with complex sound control, multiple audio effects and more!',
+        extDeveloper: 'SharkPool',
+        featured: true
+    },
+    {
         name: 'Motion Expansion',
         extensionId: 'https://gabsthecuriouskid.github.io/FirstExtension/extensions/motion-expansion.js',
         iconURL: pmMotionExpansionExtensionIcon,
@@ -597,6 +616,24 @@ const menuItems = [
         extDeveloper: 'G1nX',
     },
     {
+        name: 'My Blocks+',
+        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/My-Blocks-Plus.js',
+        iconURL: 'https://raw.githubusercontent.com/SharkPool-SP/SharkPools-Extensions/refs/heads/main/extension-thumbs/My-Blocks-Plus.svg',
+        tags: ['penguinmod', 'categoryexpansion'],
+        description: 'Create private or global custom blocks with custom inputs, colors, and more!',
+        extDeveloper: 'SharkPool, CST1229, 0znzw',
+        featured: true
+    },
+    {
+        name: 'Better Comments',
+        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Better-Comments.js',
+        iconURL: 'https://raw.githubusercontent.com/SharkPool-SP/SharkPools-Extensions/refs/heads/main/extension-thumbs/Better-Comments.svg',
+        tags: ['penguinmod', 'categoryexpansion'],
+        description: 'Better Comments with Customization and Markdown support',
+        extDeveloper: 'SharkPool',
+        featured: true
+    },
+    {
         name: 'JSON',
         extensionId: 'jgJSON',
         iconURL: jgJSONExtensionIcon,
@@ -604,6 +641,15 @@ const menuItems = [
         customInsetColor: '#00c3ff',
         tags: ['penguinmod', 'datamgmt'],
         description: 'Blocks for handling JSON objects and Arrays.',
+        featured: true
+    },
+    {
+        name: 'Particle Engine',
+        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Particle-Engine.js',
+        iconURL: 'https://studio.penguinmod.com/static/assets/bd055c3853854218f060871e694b16f7.svg',
+        tags: ['penguinmod', 'graphics'],
+        description: 'Create powerful Particle Engines without Clones',
+        extDeveloper: 'SharkPool',
         featured: true
     },
     {
@@ -796,6 +842,16 @@ const menuItems = [
         insetIconURL: PenguinmodThumb,
         customInsetColor: '#00c3ff',
         description: 'Create variables for use in one block stack. Useful to not clutter the variable list with variables you only use once.',
+        credits: 'LilyMakesThings',
+        featured: true
+    },
+    {
+        name: 'TurboWarp Temporary Variables',
+        extensionId: 'lmsTempVars2',
+        iconURL: 'https://studio.penguinmod.com/static/assets/cf21e9b36c0dfd5debc399d6fbf5d2c9.svg',
+        tags: ['turbowarp'],
+        description: 'Create disposable runtime or thread variables.',
+        insetIconURL: turbowarpIcon,
         credits: 'LilyMakesThings',
         featured: true
     },

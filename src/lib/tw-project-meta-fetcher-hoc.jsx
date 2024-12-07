@@ -6,8 +6,8 @@ import log from './log';
 import { setProjectTitle } from '../reducers/project-title';
 import { setAuthor, setDescription, setExtraProjectInfo, setRemixedProjectInfo } from '../reducers/tw';
 
-const API_URL = 'https://projects.penguinmod.com/api/projects/getPublished?id=$id';
-const API_REMIX_URL = 'https://projects.penguinmod.com/api/pmWrapper/remixes?id=$id';
+const API_URL = 'https://projects.penguinmod.com/api/v1/projects/getproject?projectID=$id&requestType=metadata';
+const API_REMIX_URL = 'https://projects.penguinmod.com/api/v1/projects/getremixes?projectId=$id';
 
 function APIProjectToReadableProject(apiProject) {
     return {
@@ -104,14 +104,14 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                     }
                     if (
                         typeof rawData.accepted === 'boolean'
-                        || rawData.remix > 0 // checks isRemix and remixId existing at the same time
+                        || String(rawData.remix) !== '0' // checks isRemix and remixId existing at the same time
                         || typeof rawData.tooLarge === 'boolean'
                         || authorName
                     ) {
                         this.props.onSetExtraProjectInfo(
                             rawData.accepted === true,
-                            rawData.remix > 0,
-                            Number(rawData.remix),
+                            String(rawData.remix) !== '0',
+                            String(rawData.remix),
                             rawData.tooLarge === true,
                             authorName
                         );

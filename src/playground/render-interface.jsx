@@ -278,12 +278,6 @@ class Interface extends React.Component {
                             <div className={styles.section}>
                                 <ProjectInput />
                             </div>
-                            {(extraProjectInfo.accepted) && (
-                            <div className={styles.remixWarningBox}>
-                                    <p>Penguinmod is currently working on getting a new server, meaning that you wont be temporarily able to see other projects.</p>
-                                    <p>Do not put in unapproved or invalid project ids or expect project loading to break.</p>
-                            </div>
-                            )}
                             {/* project not approved message */}
                             {(!extraProjectInfo.accepted) && (
                                 <div className={styles.remixWarningBox}>
@@ -394,7 +388,7 @@ Interface.propTypes = {
     extraProjectInfo: PropTypes.shape({
         accepted: PropTypes.bool,
         isRemix: PropTypes.bool,
-        remixId: PropTypes.number,
+        remixId: PropTypes.string,
         tooLarge: PropTypes.bool,
         author: PropTypes.string
     }),

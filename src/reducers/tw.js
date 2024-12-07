@@ -48,7 +48,7 @@ export const initialState = {
     extraProjectInfo: {
         accepted: true,
         isRemix: false,
-        remixId: 0,
+        remixId: '0',
         tooLarge: false,
         author: ''
     },
