@@ -26,6 +26,7 @@ const isTrustedExtension = url => (
     url.startsWith('https://extensions.penguinmod.com/') ||
     url.startsWith('https://penguinmod-extensions-gallery.vercel.app/') ||
     url.startsWith('https://gabsthecuriouskid.github.io/FirstExtension/') ||
+    url.startsWith('https://sharkpools-extensions.vercel.app/') ||
     url.startsWith('https://streamilator.github.io/') ||
     url.startsWith('https://dinosaurmod.github.io/') ||
     url.startsWith('https://mikedev101.github.io/') ||

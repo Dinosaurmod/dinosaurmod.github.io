@@ -67,6 +67,31 @@ const handleClickAddonSettings = () => {
     window.open(`${process.env.ROOT}${path}`);
 };
 
+const xmlEscape = function (unsafe) {
+    return unsafe.replace(/[<>&'"]/g, c => {
+        switch (c) {
+        case '<': return '&lt;';
+        case '>': return '&gt;';
+        case '&': return '&amp;';
+        case '\'': return '&apos;';
+        case '"': return '&quot;';
+        }
+    });
+};
+const formatProjectTitle = _title => {
+    const title = xmlEscape(String(_title));
+    const emojiRegex = /:(\w+):/g;
+    return title.replace(emojiRegex, match => {
+        const emojiName = match.replace(/:/gmi, '');
+        return `<img
+            src="https://library.penguinmod.com/files/emojis/${emojiName}.png"
+            alt=":${emojiName}:"
+            title=":${emojiName}:"
+            style="width:1.75rem;vertical-align: middle;"
+        >`;
+    });
+};
+
 const messages = defineMessages({
     defaultTitle: {
         defaultMessage: 'A mod of Penguinmod',
@@ -225,6 +250,7 @@ class Interface extends React.Component {
             /* eslint-disable no-unused-vars */
             intl,
             hasCloudVariables,
+            title,
             description,
             extraProjectInfo,
             remixedProjectInfo,
@@ -239,6 +265,16 @@ class Interface extends React.Component {
         } = this.props;
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
+        const isUpdated = extraProjectInfo.isUpdated;
+        const projectReleaseYear = extraProjectInfo.releaseDate.getFullYear();
+        const projectReleaseMonth = monthNames[extraProjectInfo.releaseDate.getMonth()];
+        const projectReleaseDay = addNumberSuffix(extraProjectInfo.releaseDate.getDate());
+        const hour24 = extraProjectInfo.releaseDate.getHours();
+        const projectReleaseHour = hour24 === 0 ? 12 : (hour24 > 12 ? hour24 - 12 : hour24);
+        const projectReleaseHalf = extraProjectInfo.releaseDate.getHours() > 11
+            ? 'PM'
+            : 'AM';
+        const projectReleaseMinute = extraProjectInfo.releaseDate.getMinutes();
         return (
             <div
                 className={classNames(styles.container, {
@@ -265,6 +301,28 @@ class Interface extends React.Component {
                     }) : null}
                 >
                     {isHomepage && announcement ? <DOMElementRenderer domElement={announcement} /> : null}
+                    {isHomepage && projectId !== '0' && title && extraProjectInfo && extraProjectInfo.author && <div className={styles.projectDetails}>
+                        <a
+                            target="_blank"
+                            href={`https://penguinmod.com/profile?user=${extraProjectInfo.author}`}
+                            rel="noreferrer"
+                        >
+                            <img
+                                className={styles.projectAuthorImage}
+                                title={extraProjectInfo.author}
+                                alt={extraProjectInfo.author}
+                                src={`https://projects.penguinmod.com/api/v1/users/getpfp?username=${extraProjectInfo.author}`}
+                            />
+                        </a>
+                        <div className={styles.projectMetadata}>
+                            <h2 dangerouslySetInnerHTML={{__html: formatProjectTitle(title)}} />
+                            <p>by <a
+                                target="_blank"
+                                href={`https://penguinmod.com/profile?user=${extraProjectInfo.author}`}
+                                rel="noreferrer"
+                            >{extraProjectInfo.author}</a></p>
+                        </div>
+                    </div>}
                     <GUI
                         onClickAddonSettings={handleClickAddonSettings}
                         onClickTheme={onClickTheme}
@@ -298,7 +356,7 @@ class Interface extends React.Component {
                                                 className={styles.remixAuthorImage}
                                                 title={remixedProjectInfo.author}
                                                 alt={remixedProjectInfo.author}
-                                                src={`https://trampoline.turbowarp.org/avatars/by-username/${remixedProjectInfo.author}`}
+                                                src={`https://projects.penguinmod.com/api/v1/users/getpfp?username=${remixedProjectInfo.author}`}
                                             />
                                         </a>
                                         <p>
@@ -408,6 +466,7 @@ Interface.propTypes = {
 const mapStateToProps = state => ({
     hasCloudVariables: state.scratchGui.tw.hasCloudVariables,
     customStageSize: state.scratchGui.customStageSize,
+    title: state.scratchGui.projectTitle,
     description: state.scratchGui.tw.description,
     extraProjectInfo: state.scratchGui.tw.extraProjectInfo,
     remixedProjectInfo: state.scratchGui.tw.remixedProjectInfo,
