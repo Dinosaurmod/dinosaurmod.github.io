@@ -298,6 +298,15 @@ class Interface extends React.Component {
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
         const isUpdated = extraProjectInfo.isUpdated;
+        const projectReleaseYear = extraProjectInfo.releaseDate.getFullYear();
+        const projectReleaseMonth = monthNames[extraProjectInfo.releaseDate.getMonth()];
+        const projectReleaseDay = addNumberSuffix(extraProjectInfo.releaseDate.getDate());
+        const hour24 = extraProjectInfo.releaseDate.getHours();
+        const projectReleaseHour = hour24 === 0 ? 12 : (hour24 > 12 ? hour24 - 12 : hour24);
+        const projectReleaseHalf = extraProjectInfo.releaseDate.getHours() > 11
+            ? 'PM'
+            : 'AM';
+        const projectReleaseMinute = extraProjectInfo.releaseDate.getMinutes();
         return (
             <div
                 className={classNames(styles.container, {
@@ -369,11 +378,12 @@ class Interface extends React.Component {
                             {/* remix info */}
                             {(extraProjectInfo.isRemix && remixedProjectInfo.loaded) && (
                                 <div className={styles.unsharedUpdate}>
-                                    <div style={{ display: "flex", flexDirection: "row" }}>
+                                    <div style={{display: 'flex', flexDirection: 'row'}}>
                                         <a
-                                            style={{ height: "32px" }}
+                                            style={{height: '32px'}}
                                             target="_blank"
                                             href={`https://penguinmod.com/profile?user=${remixedProjectInfo.author}`}
+                                            rel="noreferrer"
                                         >
                                             <img
                                                 className={styles.remixAuthorImage}
@@ -387,6 +397,7 @@ class Interface extends React.Component {
                                                 <a
                                                     target="_blank"
                                                     href={`https://penguinmod.com/profile?user=${remixedProjectInfo.author}`}
+                                                    rel="noreferrer"
                                                 >
                                                     {remixedProjectInfo.author}
                                                 </a>
@@ -426,6 +437,35 @@ class Interface extends React.Component {
                                 >
                                     View other projects by {extraProjectInfo.author}
                                 </a>
+                            )}
+                            {projectId !== '0' && extraProjectInfo.author && (
+                                <div>
+                                    {`${isUpdated ? 'Updated' : 'Uploaded'} ${projectReleaseMonth} ${projectReleaseDay} ${projectReleaseYear} at ${projectReleaseHour}:${projectReleaseMinute < 10 ? '0' : ''}${projectReleaseMinute} ${projectReleaseHalf}`}
+                                    <div className={styles.centerSector}>
+                                        <button
+                                            onClick={() => this.copyProjectLink(projectId)}
+                                            className={styles.shareLink}
+                                        >
+                                            <img
+                                                src="/share_project.png"
+                                                alt=">"
+                                            />
+                                            {'Copy Link'}
+                                        </button>
+                                        <a
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            href={`https://penguinmod.com/report?type=project&id=${projectId}`}
+                                            className={styles.reportLink}
+                                        >
+                                            <img
+                                                src="/report_flag.png"
+                                                alt="!"
+                                            />
+                                            {'Report'}
+                                        </a>
+                                    </div>
+                                </div>
                             )}
                             <div className={styles.section}>
                                 <p>
@@ -471,7 +511,9 @@ Interface.propTypes = {
         isRemix: PropTypes.bool,
         remixId: PropTypes.string,
         tooLarge: PropTypes.bool,
-        author: PropTypes.string
+        author: PropTypes.string,
+        releaseDate: PropTypes.shape(Date),
+        isUpdated: PropTypes.bool
     }),
     remixedProjectInfo: PropTypes.shape({
         loaded: PropTypes.bool,
