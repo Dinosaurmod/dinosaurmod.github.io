@@ -35,3 +35,22 @@
 .project-link {
     margin-bottom: 2px;
 }
+
+.emoji {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+}
+h1 .emoji {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+em .emoji {
+    transform: skew(-12deg, 0deg);
+}
+strong .emoji {
+    filter: contrast(2);
+}
+del .emoji {
+    filter: blur(2px);
+}
