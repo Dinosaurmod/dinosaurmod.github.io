@@ -512,7 +512,7 @@ Interface.propTypes = {
         remixId: PropTypes.string,
         tooLarge: PropTypes.bool,
         author: PropTypes.string,
-        releaseDate: PropTypes.shape(new Date),
+        releaseDate: PropTypes.shape(Date),
         isUpdated: PropTypes.bool
     }),
     remixedProjectInfo: PropTypes.shape({
