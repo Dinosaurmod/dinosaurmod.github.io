@@ -298,15 +298,6 @@ class Interface extends React.Component {
         const isHomepage = isPlayerOnly && !isFullScreen;
         const isEditor = !isPlayerOnly;
         const isUpdated = extraProjectInfo.isUpdated;
-        const projectReleaseYear = extraProjectInfo.releaseDate.getFullYear();
-        const projectReleaseMonth = monthNames[extraProjectInfo.releaseDate.getMonth()];
-        const projectReleaseDay = addNumberSuffix(extraProjectInfo.releaseDate.getDate());
-        const hour24 = extraProjectInfo.releaseDate.getHours();
-        const projectReleaseHour = hour24 === 0 ? 12 : (hour24 > 12 ? hour24 - 12 : hour24);
-        const projectReleaseHalf = extraProjectInfo.releaseDate.getHours() > 11
-            ? 'PM'
-            : 'AM';
-        const projectReleaseMinute = extraProjectInfo.releaseDate.getMinutes();
         return (
             <div
                 className={classNames(styles.container, {
