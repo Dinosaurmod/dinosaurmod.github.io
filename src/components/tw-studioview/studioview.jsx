@@ -19,7 +19,7 @@ const messages = defineMessages({
         id: 'tw.studioview.hoverText'
     },
     error: {
-        defaultMessage: 'There was an error loading the next page of projects. Penguinmod is down or you have a weak WiFi Connection.',
+        defaultMessage: 'There was an error loading the next page of projects.',
         description: 'Displayed in StudioView when an error occurs',
         id: 'tw.studioview.error'
     }
@@ -34,7 +34,7 @@ class StudioViewComponent extends React.Component {
         ]);
     }
     componentDidMount () {
-        this.studioView = new StudioView(this.props.id);
+        this.studioView = new StudioView();
         this.studioView.messages.AUTHOR_ATTRIBUTION = this.props.intl.formatMessage(messages.authorAttribution, {
             // studioview uses $-based variables
             author: '$author'
@@ -60,6 +60,7 @@ class StudioViewComponent extends React.Component {
     }
     handleSelect (id) {
         this.props.onSelect(id);
+        window.location.reload();
     }
     ref (el) {
         this.el = el;
@@ -77,7 +78,6 @@ class StudioViewComponent extends React.Component {
 }
 
 StudioViewComponent.propTypes = {
-    id: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
     placeholder: PropTypes.bool,
     onSelect: PropTypes.func.isRequired
