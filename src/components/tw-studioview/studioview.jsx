@@ -19,7 +19,7 @@ const messages = defineMessages({
         id: 'tw.studioview.hoverText'
     },
     error: {
-        defaultMessage: 'There was an error loading the next page of projects.',
+        defaultMessage: 'There was an error loading the next page of projects. Penguinmod is either down or you have a weak WiFi Connection.',
         description: 'Displayed in StudioView when an error occurs',
         id: 'tw.studioview.error'
     }
