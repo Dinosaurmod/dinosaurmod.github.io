@@ -325,8 +325,8 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
                 </shadow>
             </value>
         </block>
-        <block type="looks_sayWidth"></block>
-        <block type="looks_sayHeight"></block>
+        <block id="${targetId}_sayWidth" type="looks_sayWidth"></block>
+        <block id="${targetId}_sayHeight" type="looks_sayHeight"></block>
         ${blockSeparator}
         `}
         ${isStage ? `
@@ -421,8 +421,8 @@ const looks = function (isInitialSetup, isStage, targetId, costumeName, backdrop
                     </shadow>
                 </value>
             </block>
-            <block type="looks_stretchGetX"></block>
-            <block type="looks_stretchGetY"></block>
+            <block id="${targetId}_stretchGetX" type="looks_stretchGetX"></block>
+            <block id="${targetId}_stretchGetY" type="looks_stretchGetY"></block>
         `}
         ${blockSeparator}
         <label text="Effects"></label>
@@ -839,7 +839,7 @@ const control = function (isInitialSetup, isStage) {
     `;
 };
 
-const sensing = function (isInitialSetup, isStage) {
+const sensing = function (isInitialSetup, isStage, targetId) {
     const name = translate('SENSING_ASK_TEXT', 'What\'s your name?');
     // const openDocumentation = translate('OPEN_DOCUMENTATION', 'Open Documentation');
     const helpManual = translate('HELP_MANUAL', 'Help Manual');
@@ -1002,10 +1002,10 @@ const sensing = function (isInitialSetup, isStage) {
             ${blockSeparator}
         `}
         ${blockSeparator}
-        <block type="sensing_loud"/>
+        <block id="${targetId}_loud" type="sensing_loud"/>
         <block id="loudness" type="sensing_loudness"/>
         ${blockSeparator}
-        <block id="timer" type="sensing_timer"/>
+        <block id="${targetId}_timer" type="sensing_timer"/>
         <block type="sensing_resettimer"/>
         ${blockSeparator}
         <block id="of" type="sensing_of">
