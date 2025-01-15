@@ -446,7 +446,7 @@ class OpcodeLabels {
         this._opcodeMap.sensing_getclipboard.labelFn = () => this._translator(messages.sensing_getclipboard);
         this._opcodeMap.sensing_getdragmode.labelFn = () => this._translator(messages.sensing_getdragmode);
         this._opcodeMap.sensing_dayssince2000.labelFn = () => this._translator(messages.sensing_dayssince2000);
-        this._opcodeMap.sensing_loggedin.labelFn = () => this._translator(messages.sensing_loggedin);
+        // this._opcodeMap.sensing_loggedin.labelFn = () => this._translator(messages.sensing_loggedin);
 
         // Control
         this._opcodeMap.control_get_counter.labelFn = () => this._translator(messages.control_get_counter);
