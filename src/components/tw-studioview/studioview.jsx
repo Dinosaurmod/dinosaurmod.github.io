@@ -34,7 +34,7 @@ class StudioViewComponent extends React.Component {
         ]);
     }
     componentDidMount () {
-        this.studioView = new StudioView();
+        this.studioView = new StudioView(this.props.id);
         this.studioView.messages.AUTHOR_ATTRIBUTION = this.props.intl.formatMessage(messages.authorAttribution, {
             // studioview uses $-based variables
             author: '$author'
@@ -78,6 +78,7 @@ class StudioViewComponent extends React.Component {
 }
 
 StudioViewComponent.propTypes = {
+    id: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
     placeholder: PropTypes.bool,
     onSelect: PropTypes.func.isRequired

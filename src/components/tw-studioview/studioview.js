@@ -11,7 +11,8 @@ import classNames from 'classnames';
 /**
  * @class
  */
-var StudioView = function () {
+var StudioView = function (studioId) {
+    this.studioId = studioId;
     this.offset = 0;
     this.ended = false;
     this.loadingPage = false;
