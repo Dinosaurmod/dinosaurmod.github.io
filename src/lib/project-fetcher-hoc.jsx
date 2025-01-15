@@ -216,8 +216,17 @@ function protobufToJson(buffer) {
         newJson.monitors.push(newMonitor);
     }
 
+    for (const extensionData in json.antiSigmaExtensionData) {
+        // "legacy" shit
+        newJson.extensionData[extensionData] = json.antiSigmaExtensionData[extensionData];
+    }
+
     for (const extensionData in json.extensionData) {
-        newJson.extensionData[extensionData] = json.extensionData[extensionData];
+        if (json.extensionData[extensionData].parse) {
+            newJson.extensionData[extensionData] = JSON.parse(json.extensionData[extensionData].data);
+        } else {
+            newJson.extensionData[extensionData] = json.extensionData[extensionData].data;
+        }
     }
 
     for (const extensionURL in json.extensionURLs) {

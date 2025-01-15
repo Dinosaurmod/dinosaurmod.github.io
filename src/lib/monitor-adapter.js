@@ -45,8 +45,21 @@ export default function ({id, spriteName, opcode, params, value, vm}) {
             if (typeof item === 'boolean') {
                 value[i] = item.toString();
             }
+            if (typeof item === 'object' &&
+                typeof (item.toListItem || value.toMonitorContent || item.toReporterContent) === 'function') {
+                value[i].isHTML = true;
+            }
         }
     }
 
-    return {id, label, category, value};
+    let isHTML = false;
+    if (typeof value === 'object' &&
+        typeof (value.toMonitorContent || value.toReporterContent) === 'function') {
+        value = value.toMonitorContent
+            ? value.toMonitorContent()
+            : value.toReporterContent();
+        isHTML = true;
+    }
+
+    return {id, label, category, value, isHTML};
 }

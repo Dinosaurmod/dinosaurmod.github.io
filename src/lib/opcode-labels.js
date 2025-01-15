@@ -43,6 +43,106 @@ const messages = defineMessages({
         description: 'Label for the backdrop number monitor when shown on the stage',
         id: 'gui.opcodeLabels.backdropnumber'
     },
+    looks_stretchGetX: {
+        defaultMessage: 'stretch x',
+        description: 'Label for the stretch x monitor when shown on the stage',
+        id: 'gui.opcodeLabels.stretchGetX'
+    },
+    looks_stretchGetY: {
+        defaultMessage: 'stretch y',
+        description: 'Label for the stretch y monitor when shown on the stage',
+        id: 'gui.opcodeLabels.stretchGetY'
+    },
+    looks_sayWidth: {
+        defaultMessage: 'bubble width',
+        description: 'Label for the bubble width monitor when shown on the stage',
+        id: 'gui.opcodeLabels.sayWidth'
+    },
+    looks_sayHeight: {
+        defaultMessage: 'bubble height',
+        description: 'Label for the bubble height monitor when shown on the stage',
+        id: 'gui.opcodeLabels.sayHeight'
+    },
+    looks_getEffectValue: {
+        defaultMessage: 'effect',
+        description: 'Label for the effect monitor with no effect chosen when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue'
+    },
+    looks_getEffectValue_color: {
+        defaultMessage: 'color effect',
+        description: 'Label for the color effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.color'
+    },
+    looks_getEffectValue_fisheye: {
+        defaultMessage: 'fisheye effect',
+        description: 'Label for the fisheye effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.fisheye'
+    },
+    looks_getEffectValue_whirl: {
+        defaultMessage: 'whirl effect',
+        description: 'Label for the whirl effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.whirl'
+    },
+    looks_getEffectValue_pixelate: {
+        defaultMessage: 'pixelate effect',
+        description: 'Label for the pixelate effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.pixelate'
+    },
+    looks_getEffectValue_mosaic: {
+        defaultMessage: 'mosaic effect',
+        description: 'Label for the mosaic effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.mosaic'
+    },
+    looks_getEffectValue_brightness: {
+        defaultMessage: 'brightness effect',
+        description: 'Label for the brightness effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.brightness'
+    },
+    looks_getEffectValue_ghost: {
+        defaultMessage: 'ghost effect',
+        description: 'Label for the ghost effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.ghost'
+    },
+    looks_getEffectValue_saturation: {
+        defaultMessage: 'saturation effect',
+        description: 'Label for the saturation effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.saturation'
+    },
+    looks_getEffectValue_red: {
+        defaultMessage: 'red effect',
+        description: 'Label for the red effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.red'
+    },
+    looks_getEffectValue_green: {
+        defaultMessage: 'green effect',
+        description: 'Label for the green effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.green'
+    },
+    looks_getEffectValue_blue: {
+        defaultMessage: 'blue effect',
+        description: 'Label for the blue effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.blue'
+    },
+    looks_getEffectValue_opaque: {
+        defaultMessage: 'opaque effect',
+        description: 'Label for the opaque effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getEffectValue.opaque'
+    },
+    looks_tintColor: {
+        defaultMessage: 'tint color',
+        description: 'Label for the tint color monitor when shown on the stage',
+        id: 'gui.opcodeLabels.tintColor'
+    },
+    looks_getSpriteVisible: {
+        defaultMessage: 'visible?',
+        description: 'Label for the visible monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getSpriteVisible'
+    },
+    looks_layersGetLayer: {
+        defaultMessage: 'layer',
+        description: 'Label for the layer monitor when shown on the stage',
+        id: 'gui.opcodeLabels.layersGetLayer'
+    },
 
 
     // Sound
@@ -50,6 +150,21 @@ const messages = defineMessages({
         defaultMessage: 'volume',
         description: 'Label for the volume monitor when shown on the stage',
         id: 'gui.opcodeLabels.volume'
+    },
+    sound_getEffectValue: {
+        defaultMessage: 'effect',
+        description: 'Label for the sound effect monitor with no effect chosen when shown on the stage',
+        id: 'gui.opcodeLabels.soundgetEffectValue'
+    },
+    sound_getEffectValue_pitch: {
+        defaultMessage: 'pitch',
+        description: 'Label for the pitch effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.soundgetEffectValue.pitch'
+    },
+    sound_getEffectValue_pan: {
+        defaultMessage: 'pan left/right',
+        description: 'Label for the pan left/right effect monitor when shown on the stage',
+        id: 'gui.opcodeLabels.soundgetEffectValue.pan'
     },
     sound_tempo: {
         defaultMessage: 'tempo',
@@ -123,6 +238,41 @@ const messages = defineMessages({
         description: 'Label for the timer monitor when shown on the stage',
         id: 'gui.opcodeLabels.timer'
     },
+    sensing_mousedown: {
+        defaultMessage: 'mouse down?',
+        description: 'Label for the mouse down monitor when shown on the stage',
+        id: 'gui.opcodeLabels.mousedown'
+    },
+    sensing_mouseclicked: {
+        defaultMessage: 'mouse clicked?',
+        description: 'Label for the mouse clicked monitor when shown on the stage',
+        id: 'gui.opcodeLabels.mouseclicked'
+    },
+    sensing_mousex: {
+        defaultMessage: 'mouse x',
+        description: 'Label for the mouse x monitor when shown on the stage',
+        id: 'gui.opcodeLabels.mousex'
+    },
+    sensing_mousey: {
+        defaultMessage: 'mouse y',
+        description: 'Label for the mouse y monitor when shown on the stage',
+        id: 'gui.opcodeLabels.mousey'
+    },
+    sensing_getclipboard: {
+        defaultMessage: 'clipboard item',
+        description: 'Label for the clipboard item monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getclipboard'
+    },
+    sensing_getdragmode: {
+        defaultMessage: 'draggable?',
+        description: 'Label for the draggable monitor when shown on the stage',
+        id: 'gui.opcodeLabels.getdragmode'
+    },
+    sensing_dayssince2000: {
+        defaultMessage: 'days since 2000',
+        description: 'Label for the days since 2000 monitor when shown on the stage',
+        id: 'gui.opcodeLabels.dayssince2000'
+    },
 
     // Control
     control_get_counter: {
@@ -157,6 +307,14 @@ class OpcodeLabels {
             looks_costumenumbername: {category: 'looks'},
             looks_backdropnumbername: {category: 'looks'},
             looks_backdropname: {category: 'looks'},
+            looks_stretchGetX: {category: 'looks'},
+            looks_stretchGetY: {category: 'looks'},
+            looks_sayWidth: {category: 'looks'},
+            looks_sayHeight: {category: 'looks'},
+            looks_getEffectValue: {category: 'looks'},
+            looks_tintColor: {category: 'looks'},
+            looks_getSpriteVisible: {category: 'looks'},
+            looks_layersGetLayer: {category: 'looks'},
 
             // Data
             data_variable: {category: 'data'},
@@ -164,6 +322,7 @@ class OpcodeLabels {
 
             // Sound
             sound_volume: {category: 'sound'},
+            sound_getEffectValue: {category: 'sound'},
             sound_tempo: {category: 'sound'},
 
             // Sensing
@@ -173,6 +332,13 @@ class OpcodeLabels {
             sensing_username: {category: 'sensing'},
             sensing_current: {category: 'sensing'},
             sensing_timer: {category: 'sensing'},
+            sensing_mousedown: {category: 'sensing'},
+            sensing_mouseclicked: {category: 'sensing'},
+            sensing_mousex: {category: 'sensing'},
+            sensing_mousey: {category: 'sensing'},
+            sensing_getclipboard: {category: 'sensing'},
+            sensing_getdragmode: {category: 'sensing'},
+            sensing_dayssince2000: {category: 'sensing'},
 
             // Control
             control_get_counter: {category: 'control'}
@@ -217,6 +383,20 @@ class OpcodeLabels {
             return this._translator(messages.looks_backdropname);
         };
         this._opcodeMap.looks_backdropname.labelFn = () => this._translator(messages.looks_backdropname);
+        this._opcodeMap.looks_stretchGetX.labelFn = () => this._translator(messages.looks_stretchGetX);
+        this._opcodeMap.looks_stretchGetY.labelFn = () => this._translator(messages.looks_stretchGetY);
+        this._opcodeMap.looks_sayWidth.labelFn = () => this._translator(messages.looks_sayWidth);
+        this._opcodeMap.looks_sayHeight.labelFn = () => this._translator(messages.looks_sayHeight);
+        this._opcodeMap.looks_getEffectValue.labelFn = params => {
+            const effect = params.EFFECT.toLowerCase();
+            if (messages[`looks_getEffectValue_${effect}`]) {
+                return this._translator(messages[`looks_getEffectValue_${effect}`]);
+            }
+            return this._translator(messages.looks_getEffectValue);
+        };
+        this._opcodeMap.looks_tintColor.labelFn = () => this._translator(messages.looks_tintColor);
+        this._opcodeMap.looks_getSpriteVisible.labelFn = () => this._translator(messages.looks_getSpriteVisible);
+        this._opcodeMap.looks_layersGetLayer.labelFn = () => this._translator(messages.looks_layersGetLayer);
 
         // Data
         this._opcodeMap.data_variable.labelFn = params => params.VARIABLE;
@@ -225,6 +405,13 @@ class OpcodeLabels {
         // Sound
         this._opcodeMap.sound_volume.labelFn = () => this._translator(messages.sound_volume);
         this._opcodeMap.sound_tempo.labelFn = () => this._translator(messages.sound_tempo);
+        this._opcodeMap.sound_getEffectValue.labelFn = params => {
+            const effect = params.EFFECT.toLowerCase();
+            if (messages[`sound_getEffectValue_${effect}`]) {
+                return this._translator(messages[`sound_getEffectValue_${effect}`]);
+            }
+            return this._translator(messages.sound_getEffectValue);
+        };
 
         // Sensing
         this._opcodeMap.sensing_answer.labelFn = () => this._translator(messages.sensing_answer);
@@ -252,6 +439,14 @@ class OpcodeLabels {
             }
         };
         this._opcodeMap.sensing_timer.labelFn = () => this._translator(messages.sensing_timer);
+        this._opcodeMap.sensing_mousedown.labelFn = () => this._translator(messages.sensing_mousedown);
+        this._opcodeMap.sensing_mouseclicked.labelFn = () => this._translator(messages.sensing_mouseclicked);
+        this._opcodeMap.sensing_mousex.labelFn = () => this._translator(messages.sensing_mousex);
+        this._opcodeMap.sensing_mousey.labelFn = () => this._translator(messages.sensing_mousey);
+        this._opcodeMap.sensing_getclipboard.labelFn = () => this._translator(messages.sensing_getclipboard);
+        this._opcodeMap.sensing_getdragmode.labelFn = () => this._translator(messages.sensing_getdragmode);
+        this._opcodeMap.sensing_dayssince2000.labelFn = () => this._translator(messages.sensing_dayssince2000);
+        this._opcodeMap.sensing_loggedin.labelFn = () => this._translator(messages.sensing_loggedin);
 
         // Control
         this._opcodeMap.control_get_counter.labelFn = () => this._translator(messages.control_get_counter);

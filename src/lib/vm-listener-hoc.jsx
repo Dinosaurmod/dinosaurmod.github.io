@@ -22,6 +22,7 @@ import {
     setHasCloudVariables
 } from '../reducers/tw';
 import {setCustomStageSize} from '../reducers/custom-stage-size';
+import implementGuiAPI from './tw-extension-gui-api';
 
 let compileErrorCounter = 0;
 
@@ -73,6 +74,7 @@ const vmListenerHOC = function (WrappedComponent) {
             this.props.vm.on('COMPILE_ERROR', this.handleCompileError);
             this.props.vm.on('RUNTIME_STARTED', this.props.onClearCompileErrors);
             this.props.vm.on('STAGE_SIZE_CHANGED', this.props.onStageSizeChanged);
+            this.props.vm.on('CREATE_UNSANDBOXED_EXTENSION_API', implementGuiAPI);
         }
         componentDidMount () {
             if (this.props.attachKeyboardEvents) {

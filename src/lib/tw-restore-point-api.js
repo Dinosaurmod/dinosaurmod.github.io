@@ -362,9 +362,10 @@ const deleteAllRestorePoints = () => openDB().then(db => new Promise((resolveTra
 /**
  * @param {VirtualMachine} vm scratch-vm instance
  * @param {number} id the restore point's ID
+ * @param {boolean} dontLoadProject if true, the project will not be loaded and this will simply return the sb3 file
  * @returns {Promise<ArrayBuffer>} Resolves with sb3 file
  */
-const loadRestorePoint = (vm, id) => openDB().then(db => new Promise((resolveTransaction, rejectTransaction) => {
+const loadRestorePoint = (vm, id, dontLoadProject) => openDB().then(db => new Promise((resolveTransaction, rejectTransaction) => {
     const transaction = db.transaction([METADATA_STORE, PROJECT_STORE, ASSET_STORE], 'readonly');
     transaction.onerror = () => {
         rejectTransaction(new Error(`Transaction error: ${transaction.error}`));
@@ -378,6 +379,12 @@ const loadRestorePoint = (vm, id) => openDB().then(db => new Promise((resolveTra
     // zip in memory.
 
     const loadVM = () => {
+        if (dontLoadProject) {
+            return resolveTransaction(zip.generateAsync({
+                type: 'arraybuffer'
+            }));
+        }
+
         resolveTransaction(
             zip.generateAsync({
                 // Don't bother compressing it since it will be immediately decompressed
@@ -426,7 +433,9 @@ const loadRestorePoint = (vm, id) => openDB().then(db => new Promise((resolveTra
         };
     };
 
-    vm.stop();
+    if (!dontLoadProject) {
+        vm.stop();
+    }
 
     loadMetadata();
 }));
