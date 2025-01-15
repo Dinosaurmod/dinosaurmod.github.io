@@ -107,6 +107,7 @@ a {
     color: #4af;
 }
 
+.unshared-update,
 .infobox {
     line-height: 1.5em;
     padding: 0.5rem;
@@ -129,10 +130,11 @@ a {
     text-decoration: none;
 }
 
-.unshared-update {
+/* .unshared-update {
     border-color: #ffb9b9;
     background-color: #ffdbdb;
-}
+} */
+
 [theme="dark"] .unshared-update {
     border-color: #203652;
     background-color: #16202c;
@@ -170,6 +172,75 @@ a {
     height: 32px;
     margin-right: 4px;
     border-radius: 4px;
+}
+
+.project-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 8px 0;
+}
+.project-metadata {
+    display: flex;
+    flex-direction: column;
+}
+.project-author-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+.project-metadata h2 {
+    line-height: 1.4em;
+}
+.project-metadata p {
+    font-size: 0.85rem;
+}
+.project-metadata p a,
+.project-metadata a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.center-sector {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.report-link,
+.share-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.share-link > img,
+.report-link > img {
+    height: 16px;
+    margin-right: 4px;
+}
+.report-link {
+    color: red !important;
+}
+.share-link {
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    color: rgb(90, 90, 90) !important;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.share-link:active {
+    filter: brightness(0.8);
+}
+.share-link > img {
+    filter: brightness(0.3529411765);
+}
+[theme="dark"] .share-link {
+    color: rgb(202, 202, 202) !important;
+}
+[theme="dark"] .share-link > img {
+    filter: brightness(0.7921568627);
 }
 
 .remixList {

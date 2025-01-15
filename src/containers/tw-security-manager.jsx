@@ -34,9 +34,14 @@ const isTrustedExtension = url => (
     url.startsWith('https://sayamindu.github.io/scratch-extensions/') ||
     url.startsWith('https://ldsjvg.webwave.dev/') ||
     url.startsWith('https://electramod-extensions-gallery.vercel.app/') ||
+    url.startsWith('https://pen-group.github.io/') || // Pen-Group / ObviousAlexC
 
     // For development.
     url.startsWith('http://localhost:8000') ||
+    url.startsWith('http://localhost:6000') || // Launcher Home
+    url.startsWith('http://localhost:6001') || // Launcher Extensions
+    url.startsWith('http://localhost:5173') || // Local Home or Extensions
+    url.startsWith('http://localhost:5174') || // Local Home or Extensions
 
     extensionsTrustedByUser.has(url)
 );

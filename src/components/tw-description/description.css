@@ -37,9 +37,10 @@
 }
 
 .emoji {
-    width: 1.5rem;
-    height: 1.5rem;
-    object-fit: contain;
+	width: 1.4lh;
+	height: 1.4lh;
+	object-fit: contain;
+	vertical-align: bottom;
 }
 h1 .emoji {
     width: 1.8rem;
