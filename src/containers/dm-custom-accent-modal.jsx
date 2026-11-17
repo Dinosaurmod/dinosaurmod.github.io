@@ -7,9 +7,10 @@ import {closeCustomAccentModal} from '../reducers/modals';
 import {setTheme} from '../reducers/theme';
 import CustomAccentModalComponent from '../components/dm-custom-accent-modal/custom-accent-modal.jsx';
 import SavedAccentTemplate, {CUSTOM_ACCENTS_KEY} from '../components/dm-custom-accent-modal/saved-accent-template.js';
-import { persistAccentCustom, persistAccent } from '../lib/themes/accentPersistance.js'
-import { Theme } from '../lib/themes/index.js'
-import downloadBlob from '../lib/download-blob.js'
+import { persistAccentCustom, persistAccent, ACCENT_KEY, THEME_KEY } from '../lib/themes/accentPersistance.js';
+import { Theme } from '../lib/themes/index.js';
+import downloadBlob from '../lib/download-blob.js';
+import {getShowOpenFilePicker} from '../lib/tw-file-system-access';
 
 // SavedAccentTemplate("*Name 1*", { primaryColor: "#FF0000" })
 
@@ -34,6 +35,8 @@ class CustomAccentModal extends React.Component {
 
         //if (localStorage) localStorage.pushArrayItem_INTERNAL(this.CUSTOM_ACCENTS_KEY_ON, JSON.stringify([]));
         if (localStorage.getItem(this.CUSTOM_ACCENTS_KEY) == null) localStorage.setItem(this.CUSTOM_ACCENTS_KEY, JSON.stringify([]));
+
+        const ShowOpenFilePicker = getShowOpenFilePicker();
     }
     test () {
         console.log("test")
@@ -96,7 +99,10 @@ class CustomAccentModal extends React.Component {
     }
     deactivateAccent (accentData, refreshUI) {
         //localStorage.setItem(this.CUSTOM_ACCENTS_KEY_ON, JSON.stringify(JSON.parse(localStorage.getItem(this.CUSTOM_ACCENTS_KEY_ON)).push(accentData)))
-        this.props.onChangeTheme(this.props.theme.set('accent', localStorage.getItem("tw:accent")).set('gui', localStorage.getItem("tw:theme")))
+        this.props.onChangeTheme(this.props.theme
+            .set('accent', localStorage.getItem(ACCENT_KEY))
+            .set('gui', localStorage.getItem(THEME_KEY))
+        )
     }
     handleExportAccents() {
         let savedAccents = localStorage.getItem(this.CUSTOM_ACCENTS_KEY)
@@ -125,7 +131,7 @@ class CustomAccentModal extends React.Component {
         };
 
         async function getFile() {
-            const [fileHandle] = await window.showOpenFilePicker(pickerOpts);
+            const [fileHandle] = await ShowOpenFilePicker(pickerOpts);
             return await fileHandle.getFile();
         }
         
@@ -176,7 +182,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onChangeTheme: theme => {
-        dispatch(setTheme(accent));
+        dispatch(setTheme(theme));
         //dispatch(closeSettingsMenu());
         persistAccent(theme);
     },

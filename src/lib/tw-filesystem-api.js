@@ -1,9 +1,14 @@
 import { isApiAvailable, isTypeFilterAvailable } from './pm-mature-fs-available';
+import {getShowOpenFilePicker, getShowSaveFilePicker, getShowDirectoryPicker} from './tw-file-system-access';
 
 const available = isApiAvailable;
 
+const ShowOpenFilePicker = getShowOpenFilePicker();
+const ShowSaveFilePicker = getShowSaveFilePicker();
+const ShowDirectoryPicker = getShowDirectoryPicker();
+
 // pm: Some bad mobile devices block any file type (iOS), so these funcs should allow all files on mobile
-const showSaveFilePicker = fileName => window.showSaveFilePicker({
+const showSaveFilePicker = fileName => ShowSaveFilePicker({
     suggestedName: fileName,
     ...(!isTypeFilterAvailable() ? {} : {
         types: [
@@ -43,7 +48,7 @@ const showSaveFilePicker = fileName => window.showSaveFilePicker({
 });
 
 const showOpenFilePicker = async () => {
-    const [handle] = await window.showOpenFilePicker({
+    const [handle] = await ShowOpenFilePicker({
         multiple: false,
         ...(!isTypeFilterAvailable() ? {} : {
             types: [
@@ -90,7 +95,7 @@ const showOpenFilePicker = async () => {
 };
 
 const showDirectoryPicker = async (optId, optStartIn) => {
-    const handle = await window.showDirectoryPicker({
+    const handle = await ShowDirectoryPicker({
         id: optId || "pm-directory-picker",
         mode: "readwrite",
         startIn: optStartIn || "documents",

@@ -15,6 +15,7 @@ import deleteIcon from './delete.svg';
 
 import {isUnsupported} from './unsupported-browsers.js';
 import SavedAccentTemplate, {CUSTOM_ACCENTS_KEY} from './saved-accent-template.js';
+import {hasChromium157FilePickerBug} from '../../lib/tw-file-system-access';
 
 /* eslint-disable react/no-multi-comp */
 
@@ -400,6 +401,11 @@ const CustomAccentModalComponent = function (props) {
                         onEditClicked={props.onEditClicked}
                         onDeleteClicked={props.onDeleteClicked}
                     />*/}
+                    {hasChromium157FilePickerBug() ? (
+                        <div className={styles.nothingText}>
+                            The 'showOpenFilePicker' function/dialog, which is required to import Accents, may be broken in your browser. (Chromium 157)
+                        </div>
+                    ) : ()}
                     {isUnsupported() ? (
                         <div className={styles.nothingText}>
                             Your browser does not support the 'showOpenFilePicker' function, which is required to import Accents.

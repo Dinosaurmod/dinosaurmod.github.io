@@ -10,8 +10,6 @@ function isUnsupported () {
     return false;
 }
 
-isUnsupported ()
-
 export {
     isUnsupported,
 };

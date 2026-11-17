@@ -123,5 +123,6 @@ export {
     persistAccent,
     persistAccentCustom,
     CUSTOM_ACCENTS_KEY,
-    ACCENT_KEY
+    ACCENT_KEY,
+    THEME_KEY
 }
