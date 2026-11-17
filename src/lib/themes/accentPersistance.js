@@ -52,6 +52,7 @@ const detectAccent = () => {
  * @param {Theme} theme the theme
  */
 const persistAccent = theme => {
+    console.log(theme) // debug
     if (localStorage) localStorage.setItem(ACCENT_KEY, theme.accent);
 
     const local = localStorage.getItem(ACCENT_KEY)
@@ -110,7 +111,7 @@ if (localStorage) {
     for (const accentData of (CUSTOM_ACCENTS_ARRAY == [] ? [{ nothing: true }] : CUSTOM_ACCENTS_ARRAY)) {
         if (accentData.nothing) continue;
         if (accentData.enabled == true) {
-            persistThemeCustom({
+            persistAccentCustom({
                 primaryColor: accentData.colors.primary,
                 primaryColorDark: accentData.colors.primaryDark
             })

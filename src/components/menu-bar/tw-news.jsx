@@ -20,7 +20,7 @@ const NewsBody = () => (
         </div>
         <div>
             {/* eslint-disable-next-line max-len */}
-            {'Until they fix it, saving projects will always download a new copy of your project instead of overwriting the original file.'}
+            {'Until they fix it, saving projects will always download a new copy of your project instead of overwriting the original file. (Folders don\'t work for now)'}
         </div>
     </div>
 );

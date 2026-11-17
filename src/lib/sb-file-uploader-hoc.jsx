@@ -1,7 +1,7 @@
 import bindAll from 'lodash.bindall';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {defineMessages, intlShape, injectIntl} from 'react-intl';
+import {intlShape, injectIntl} from 'react-intl';
 import {connect} from 'react-redux';
 import log from '../lib/log';
 import sharedMessages from './shared-messages';
@@ -9,6 +9,7 @@ import FileSystemAPI from './tw-filesystem-api';
 import {isTypeFilterAvailable} from './pm-mature-fs-available';
 import {setFileHandle} from '../reducers/tw';
 import JSZip from 'jszip';
+import {getShowOpenFilePicker, openFilePickerOptions, getShowDirectoryPicker} from './tw-file-system-access';
 
 import {
     LoadingStates,
@@ -85,10 +86,10 @@ const SBFileUploaderHOC = function (WrappedComponent) {
             this.fileReader = new FileReader();
             this.fileReader.onload = this.onload;
             // tw: Use FS API when available
-            if (FileSystemAPI.available()) {
+            if (this.props.showOpenFilePicker && FileSystemAPI.available()) {
                 (async () => {
                     try {
-                        const handle = await FileSystemAPI.showOpenFilePicker();
+                        const [handle] = await this.props.showOpenFilePicker(openFilePickerOptions);
                         const file = await handle.getFile();
                         this.handleChange({
                             target: {
@@ -125,7 +126,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
 
         // pm: essentially step 1 + 2 + 3 but we pick and choose what we want to keep. folder requires FS api
         async handleStartFolderUpload() {
-            if (!FileSystemAPI.available()) return;
+            if (!(FileSystemAPI.available() && this.props.showDirectoryPicker)) return;
 
             const {
                 intl,
@@ -231,7 +232,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                     // Don't update file handle until after confirming replace.
                     const handle = thisFileInput.handle;
                     if (handle) {
-                        if (this.fileToUpload.name.endsWith('.pm') || this.fileToUpload.name.endsWith('.pmp') || this.fileToUpload.name.endsWith('.dino')) {
+                        if (this.fileToUpload.name.endsWith('.pm') || this.fileToUpload.name.endsWith('.pmp') || this.fileToUpload.name.endsWith('.dino') || this.fileToUpload.name.endsWith('.sb3')) {
                             this.props.onSetFileHandle(handle);
                         } else {
                             this.props.onSetFileHandle(null);
@@ -379,12 +380,21 @@ const SBFileUploaderHOC = function (WrappedComponent) {
         onSetProjectTitle: PropTypes.func,
         projectChanged: PropTypes.bool,
         requestProjectUpload: PropTypes.func,
+        showOpenFilePicker: PropTypes.func,
+        showDirectoryPicker: PropTypes.func,
         userOwnsProject: PropTypes.bool,
         vm: PropTypes.shape({
             loadProject: PropTypes.func,
-            stop: PropTypes.func
+            stop: PropTypes.func,
+            renderer: PropTypes.shape({
+                draw: PropTypes.func
+            })
         }),
         onSetFileHandle: PropTypes.func
+    };
+    SBFileUploaderComponent.defaultProps = {
+        showOpenFilePicker: getShowOpenFilePicker(),
+        showDirectoryPicker: getShowDirectoryPicker()
     };
     const mapStateToProps = (state, ownProps) => {
         const loadingState = state.scratchGui.projectState.loadingState;

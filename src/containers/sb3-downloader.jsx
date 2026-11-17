@@ -10,6 +10,7 @@ import {setFileHandle} from '../reducers/tw';
 import FileSystemAPI from '../lib/tw-filesystem-api';
 import {getIsShowingProject} from '../reducers/project-state';
 import log from '../lib/log';
+import {getShowSaveFilePicker, saveFilePickerOptions, getShowDirectoryPicker} from '../lib/tw-file-system-access';
 
 // from sb-file-uploader-hoc.jsx
 const getProjectTitleFromFilename = fileInputFilename => {
@@ -98,7 +99,7 @@ class SB3Downloader extends React.Component {
             return;
         }
         try {
-            const handle = await FileSystemAPI.showSaveFilePicker(this.props.projectFilename);
+            const handle = await this.props.showSaveFilePicker(saveFilePickerOptions(this.props.projectFilename));
             await this.saveToHandle(handle);
             this.props.onSetFileHandle(handle);
             const title = getProjectTitleFromFilename(handle.name);
@@ -286,14 +287,16 @@ class SB3Downloader extends React.Component {
         return children(
             this.props.className,
             this.downloadProject,
-            FileSystemAPI.available() ? {
+            this.props.showDirectoryPicker && FileSystemAPI.available() ? {
+                saveAsFolder: this.saveAsFolder
+            } : {}
+            this.props.showSaveFilePicker && FileSystemAPI.available() ? {
                 available: true,
                 name: this.props.fileHandle ? this.props.fileHandle.name : null,
                 saveAsNew: this.saveAsNew,
                 saveToLastFile: this.saveToLastFile,
                 saveToLastFileOrNew: this.saveToLastFileOrNew,
-                smartSave: this.saveToLastFileOrNew,
-                saveAsFolder: this.saveAsFolder
+                smartSave: this.saveToLastFileOrNew
             } : {
                 available: false,
                 smartSave: this.downloadProject
@@ -327,10 +330,14 @@ SB3Downloader.propTypes = {
     onShowSavingAlert: PropTypes.func,
     onShowSaveSuccessAlert: PropTypes.func,
     onShowSaveErrorAlert: PropTypes.func,
-    onProjectUnchanged: PropTypes.func
+    onProjectUnchanged: PropTypes.func,
+    showSaveFilePicker: PropTypes.func,
+    showDirectoryPicker: PropTypes.func
 };
 SB3Downloader.defaultProps = {
-    className: ''
+    className: '',
+    showSaveFilePicker: getShowSaveFilePicker(),
+    showDirectoryPicker: getShowDirectoryPicker()
 };
 
 const mapStateToProps = state => ({
