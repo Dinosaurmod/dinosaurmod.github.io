@@ -707,16 +707,18 @@ class MenuBar extends React.Component {
                                             <SB3Downloader>{(_className, downloadProject, extended) => (
                                                 <React.Fragment>
                                                     {extended.available && (
-                                                        <MenuItem
-                                                            onClick={this.props.onStartFolderUpload}
-                                                        >
-                                                            {"Load from a folder"}
-                                                        </MenuItem>
-                                                        <MenuItem
-                                                            onClick={this.getSaveToComputerHandler(extended.saveAsFolder)}
-                                                        >
-                                                            {"Export project to folder"}
-                                                        </MenuItem>
+                                                        <React.Fragment>
+                                                            <MenuItem
+                                                                onClick={this.props.onStartFolderUpload}
+                                                            >
+                                                                {"Load from a folder"}
+                                                            </MenuItem>
+                                                            <MenuItem
+                                                                onClick={this.getSaveToComputerHandler(extended.saveAsFolder)}
+                                                            >
+                                                                {"Export project to folder"}
+                                                            </MenuItem>
+                                                        </React.Fragment>
                                                     )}
                                                 </React.Fragment>
                                             )}</SB3Downloader>

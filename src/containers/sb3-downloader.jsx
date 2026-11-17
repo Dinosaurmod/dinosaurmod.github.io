@@ -289,7 +289,7 @@ class SB3Downloader extends React.Component {
             this.downloadProject,
             this.props.showDirectoryPicker && FileSystemAPI.available() ? {
                 saveAsFolder: this.saveAsFolder
-            } : {}
+            } : {},
             this.props.showSaveFilePicker && FileSystemAPI.available() ? {
                 available: true,
                 name: this.props.fileHandle ? this.props.fileHandle.name : null,
