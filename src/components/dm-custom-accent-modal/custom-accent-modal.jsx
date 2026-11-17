@@ -405,7 +405,9 @@ const CustomAccentModalComponent = function (props) {
                         <div className={styles.nothingText}>
                             The 'showOpenFilePicker' function/dialog, which is required to import Accents, may be broken in your browser. (Chromium 157)
                         </div>
-                    ) : ()}
+                    ) : (<Gap
+                        height="0.01px"
+                    />)}
                     {isUnsupported() ? (
                         <div className={styles.nothingText}>
                             Your browser does not support the 'showOpenFilePicker' function, which is required to import Accents.
