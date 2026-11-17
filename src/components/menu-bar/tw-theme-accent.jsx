@@ -11,7 +11,7 @@ import {ACCENT_LIGHTBLUE, ACCENT_MAP, ACCENT_RED, ACCENT_LIME, ACCENT_BLUE, ACCE
 import {openAccentMenu, accentMenuOpen, closeSettingsMenu} from '../../reducers/menus.js';
 import {openCustomAccentModal} from '../../reducers/modals';
 import {setTheme} from '../../reducers/theme.js';
-import {persistTheme} from '../../lib/themes/accentPersistance.js';
+import {persistAccent} from '../../lib/themes/accentPersistance.js';
 import rainbowIcon from './tw-accent-rainbow.svg';
 import styles from './settings-menu.css';
 
@@ -170,7 +170,7 @@ const mapDispatchToProps = dispatch => ({
     onChangeTheme: theme => {
         dispatch(setTheme(theme));
         dispatch(closeSettingsMenu());
-        persistTheme(theme);
+        persistAccent(theme);
     },
     onOpen: () => dispatch(openAccentMenu()),
     onCustomAccent: () => {

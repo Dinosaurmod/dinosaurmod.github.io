@@ -71,7 +71,7 @@ class Theme {
         if (what === 'accent') {
             return new Theme(to, this.gui);
         } else if (what === 'gui') {
-            return new Theme(this.accent);
+            return new Theme(this.accent, to);
         }
     }
 

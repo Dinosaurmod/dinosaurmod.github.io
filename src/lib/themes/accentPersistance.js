@@ -4,7 +4,7 @@ const matchMedia = query => (window.matchMedia ? window.matchMedia(query) : null
 const PREFERS_HIGH_CONTRAST_QUERY = matchMedia('(prefers-contrast: more)');
 const PREFERS_DARK_QUERY = matchMedia('(prefers-color-scheme: dark)');
 
-const STORAGE_KEY = 'tw:theme';
+const THEME_KEY = 'tw:theme';
 const ACCENT_KEY = 'tw:accent';
 const CUSTOM_ACCENTS_KEY = "tw:accent:customAccents";
 
@@ -24,23 +24,24 @@ const recolorEvent = new CustomEvent("RecolorEvent", {
  */
 const systemPreferencesTheme = () => {
     if (PREFERS_HIGH_CONTRAST_QUERY && PREFERS_HIGH_CONTRAST_QUERY.matches) {
-        return Theme.highContrast;
+        return 'light'; //Theme.highContrast
     }
     if (PREFERS_DARK_QUERY && PREFERS_DARK_QUERY.matches) {
-        return Theme.dark;
+        return 'dark'; //Theme.dark
     }
-    return Theme.light;
+    return 'light'; //Theme.light
 };
 
 /**
  * @returns {Theme} the theme
  */
-const detectTheme = () => {
+const detectAccent = () => {
     try {
-        const local = localStorage.getItem(ACCENT_KEY);
+        const local = localStorage.getItem(THEME_KEY) || systemPreferencesTheme();
+        const local2 = localStorage.getItem(ACCENT_KEY) || 'lime green';
 
         return new Theme(
-            local || new Theme('lime green'), localStorage.getItem(STORAGE_KEY)
+            local2, local
         );
     } catch (e) {
         // ignore
@@ -50,7 +51,7 @@ const detectTheme = () => {
 /**
  * @param {Theme} theme the theme
  */
-const persistTheme = theme => {
+const persistAccent = theme => {
     if (localStorage) localStorage.setItem(ACCENT_KEY, theme.accent);
 
     const local = localStorage.getItem(ACCENT_KEY)
@@ -71,9 +72,9 @@ const persistTheme = theme => {
 };
 
 /**
- * @param {any} colors the colors of the custom theme
+ * @param {any} colors the colors of the custom accent
  */
-const persistThemeCustom = colors => {
+const persistAccentCustom = colors => {
     function evaluateCss (css) {
         const variableMatch = css.match(/^var\(([\w-]+)\)$/);
         if (variableMatch) {
@@ -118,8 +119,9 @@ if (localStorage) {
 }
 
 export {
-    detectTheme,
-    persistTheme,
-    persistThemeCustom,
+    detectAccent,
+    persistAccent,
+    persistAccentCustom,
+    CUSTOM_ACCENTS_KEY,
     ACCENT_KEY
 }

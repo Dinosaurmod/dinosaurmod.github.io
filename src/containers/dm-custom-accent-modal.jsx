@@ -7,7 +7,7 @@ import {closeCustomAccentModal} from '../reducers/modals';
 import {setTheme} from '../reducers/theme';
 import CustomAccentModalComponent from '../components/dm-custom-accent-modal/custom-accent-modal.jsx';
 import SavedAccentTemplate, {CUSTOM_ACCENTS_KEY} from '../components/dm-custom-accent-modal/saved-accent-template.js';
-import { persistThemeCustom, persistTheme } from '../lib/themes/accentPersistance.js'
+import { persistAccentCustom, persistAccent } from '../lib/themes/accentPersistance.js'
 import { Theme } from '../lib/themes/index.js'
 import downloadBlob from '../lib/download-blob.js'
 
@@ -176,9 +176,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onChangeTheme: theme => {
-        dispatch(setTheme(theme));
+        dispatch(setTheme(accent));
         //dispatch(closeSettingsMenu());
-        persistTheme(theme);
+        persistAccent(theme);
     },
     onClose: () => dispatch(closeCustomAccentModal())
 });
