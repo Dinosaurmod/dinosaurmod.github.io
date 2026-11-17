@@ -1,9 +1,9 @@
-import {detectTheme} from '../lib/themes/accentPersistance';
+import {detectAccent} from '../lib/themes/accentPersistance';
 
 const SET_THEME = 'scratch-gui/theme/SET_THEME';
 
 const initialState = {
-    theme: detectTheme()
+    theme: detectAccent()
 };
 
 const reducer = (state = initialState, action) => {

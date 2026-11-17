@@ -3,7 +3,7 @@ export function modifiedCreateAllInputs(connectionMap) {
   this.createIcon_()
 
   // Split the proc into components, by %n, %b, %s and %l (ignoring escaped).
-  var procComponents = this.procCode_.split(/(?=[^\\]%[nbslc])/);
+  var procComponents = this.procCode_.split(/(?=[^\\]%[nbslcm])/);
   procComponents = procComponents.map(function (c) {
     return c.trim(); // Strip whitespace.
   });
@@ -15,7 +15,7 @@ export function modifiedCreateAllInputs(connectionMap) {
     var argumentType = component.substring(1, 2);
     var id = this.argumentIds_[argumentCount];
     // Don't treat %l as an argument
-    if (component.substring(0, 1) == '%' && (['n', 's', 'b', 'c'].includes(argumentType)) && id) {
+    if (component.substring(0, 1) == '%' && (['n', 's', 'b', 'c', 'm'].includes(argumentType)) && id) {
       /*
       if (!(argumentType == "n" || argumentType == "b" || argumentType == "s")) {
         throw new Error("Found an custom procedure with an invalid type: " + argumentType);
