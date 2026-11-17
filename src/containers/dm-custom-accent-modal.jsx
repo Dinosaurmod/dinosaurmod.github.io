@@ -96,7 +96,7 @@ class CustomAccentModal extends React.Component {
     }
     deactivateAccent (accentData, refreshUI) {
         //localStorage.setItem(this.CUSTOM_ACCENTS_KEY_ON, JSON.stringify(JSON.parse(localStorage.getItem(this.CUSTOM_ACCENTS_KEY_ON)).push(accentData)))
-        this.props.onChangeTheme(this.props.theme.set(localStorage.getItem("tw:accent")))
+        this.props.onChangeTheme(this.props.theme.set('accent', localStorage.getItem("tw:accent")).set('gui', localStorage.getItem("tw:theme")))
     }
     handleExportAccents() {
         let savedAccents = localStorage.getItem(this.CUSTOM_ACCENTS_KEY)
