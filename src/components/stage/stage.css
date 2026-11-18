@@ -29,6 +29,11 @@
     color-scheme: light;
 }
 
+.stage-hidden {
+    position: absolute !important;
+    opacity: 0;
+}
+
 .stage.full-screen {
     /* tw: remove fullscreen border */
 }

@@ -228,6 +228,15 @@ const menuItems = [
         featured: true
     },
     {
+        name: 'Pen+',
+        extensionId: 'https://extensions.penguinmod.com/extensions/ObviousAlexC/PenPlus.js',
+        tags: ['categoryexpansion', 'graphics'],
+        iconURL: 'https://extensions.penguinmod.com/images/ObviousAlexC/PenPlus.svg',
+        description: "An extension to the Pen category!",
+        featured: true,
+        extDeveloper: 'pinksheep2917'
+    },
+    {
         name: 'Animated Text',
         extensionId: 'text',
         iconURL: animatedTextIconURL,
@@ -235,6 +244,16 @@ const menuItems = [
         customInsetColor: '#9A66FF',
         tags: ['scratch'],
         description: 'Bring words to life.',
+        featured: true
+    },
+    {
+        name: 'Iris Text',
+        extensionId: 'https://extensions.penguinmod.com/extensions/Gen1x/iris-text.js',
+        iconURL: 'https://extensions.penguinmod.com/images/Gen1x/iris-text.avif',
+        tags: ['penguinmod', 'graphics'],
+        description: 'A heavily-expanded text engine loosely based on Animated Text! Adds support for rich text, per-character control, and more!',
+        extDeveloper: 'Gen1xLol',
+        isNew: true,
         featured: true
     },
     {
@@ -532,15 +551,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Pen+',
-        extensionId: 'https://extensions.penguinmod.com/extensions/ObviousAlexC/PenPlus.js',
-        tags: ['categoryexpansion', 'graphics'],
-        iconURL: 'https://extensions.penguinmod.com/images/ObviousAlexC/PenPlus.svg',
-        description: "An extension to the Pen category!",
-        featured: true,
-        extDeveloper: 'pinksheep2917'
-    },
-    {
         name: 'Sound Systems',
         extensionId: 'jgExtendedAudio',
         iconURL: jgExtendedAudioExtensionIcon,
@@ -552,7 +562,7 @@ const menuItems = [
     },
     {
         name: 'Tune Shark V3',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Tune-Shark-V3.js',
+        extensionId: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-code/Tune-Shark-V3.js',
         iconURL: 'https://studio.penguinmod.com/static/assets/ad2841e0f0228e47e911a5b571480f7c.svg',
         tags: ['penguinmod', 'categoryexpansion', 'noisemaker'],
         description: 'Advanced audio engine with complex sound control, multiple audio effects and more!',
@@ -640,7 +650,7 @@ const menuItems = [
     },
     {
         name: 'My Blocks+',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/My-Blocks-Plus.js',
+        extensionId: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-code/My-Blocks-Plus.js',
         iconURL: 'https://raw.githubusercontent.com/SharkPool-SP/SharkPools-Extensions/refs/heads/main/extension-thumbs/My-Blocks-Plus.svg',
         tags: ['penguinmod', 'categoryexpansion'],
         description: 'Create private or global custom blocks with custom inputs, colors, and more!',
@@ -649,8 +659,8 @@ const menuItems = [
     },
     {
         name: 'Dropdown Maker',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Dropdown-Maker.js',
-        iconURL: 'https://sharkpools-extensions.vercel.app/extension-thumbs/Dropdown-Maker.svg',
+        extensionId: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-code/Dropdown-Maker.js',
+        iconURL: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-thumbs/Dropdown-Maker.svg',
         tags: ['penguinmod'],
         description: 'Create Custom Dropdowns! Best paired with My Blocks+',
         extDeveloper: 'SharkPool, CST1229, 0znzw',
@@ -658,7 +668,7 @@ const menuItems = [
     },
     {
         name: 'Better Comments',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Better-Comments.js',
+        extensionId: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-code/Better-Comments.js',
         iconURL: 'https://raw.githubusercontent.com/SharkPool-SP/SharkPools-Extensions/refs/heads/main/extension-thumbs/Better-Comments.svg',
         tags: ['penguinmod', 'categoryexpansion'],
         description: 'Better Comments with Customization and Markdown support',
@@ -667,7 +677,7 @@ const menuItems = [
     },
     {
         name: 'Particle Engine',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Particle-Engine.js',
+        extensionId: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-code/Particle-Engine.js',
         iconURL: 'https://studio.penguinmod.com/static/assets/bd055c3853854218f060871e694b16f7.svg',
         tags: ['penguinmod', 'graphics'],
         description: 'Create powerful Particle Engines without Clones',
@@ -846,7 +856,7 @@ const menuItems = [
     },
     {
         name: 'Turbo Skins',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Turbo-Skins.js',
+        extensionId: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-code/Turbo-Skins.js',
         tags: ['penguinmod', 'graphics'],
         iconURL: 'https://studio.penguinmod.com/static/assets/1f6edff805eca1968b4d615456b1033f.svg',
         description: 'Display sprites with various images or costumes and control their hitboxes',
@@ -889,7 +899,7 @@ const menuItems = [
     },
     {
         name: 'SharkPool\'s Temporary Variables',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Temporary-Variables.js',
+        extensionId: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-code/Temporary-Variables.js',
         iconURL: 'https://studio.penguinmod.com/static/assets/1505a7fe5cdea368a3e32622c3e334f1.svg',
         tags: ['penguinmod', 'datamgmt'],
         description: 'Create temporary runtime, threaded, sprite & scoped variables.',
@@ -918,7 +928,7 @@ const menuItems = [
     },
     {
         name: 'Swift JSON',
-        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/JSON-Array.js',
+        extensionId: 'https://sharkpool-sp.github.io/SharkPools-Extensions/extension-code/JSON-Array.js',
         iconURL: 'https://studio.penguinmod.com/static/assets/e48e8bc4ca2913e19da20f085e9adbe9.svg',
         insetIconURL: PenguinmodThumb,
         customInsetColor: '#00c3ff',
@@ -1535,6 +1545,33 @@ const menuItems = [
         featured: true
     },
     {
+        name: 'Iterators',
+        extensionId: 'https://extensions.penguinmod.com/extensions/Div/divIterators.js',
+        iconURL: 'https://extensions.penguinmod.com/images/Div/divIterators.svg',
+        tags: ['penguinmod', 'datamgmt'],
+        description: 'Transform and iterate over different types of collections and more.',
+        extDeveloper: 'Dicuo',
+        featured: true
+    },
+    {
+        name: 'Regular Expressions',
+        extensionId: 'https://extensions.penguinmod.com/extensions/DogeisCut/dogeiscutRegularExpressions.js',
+        iconURL: 'https://extensions.penguinmod.com/images/DogeisCut/dogeiscutRegularExpressions.svg',
+        tags: ['penguinmod'],
+        description: 'Create, modify, filter, and more with the new regular expression type.',
+        extDeveloper: 'DogeisCut',
+        featured: true
+    },
+    {
+        name: 'Date Format',
+        extensionId: 'https://extensions.penguinmod.com/extensions/ddededodediamante/dateFormatV2.js',
+        iconURL: 'https://extensions.penguinmod.com/images/ddededodediamante/dateFormat.svg',
+        tags: ['penguinmod', 'datamgmt'],
+        description: 'Manage, format and compare dates.',
+        extDeveloper: 'ddededodediamante',
+        featured: true
+    },
+    {
         name: (
             <FormattedMessage
                 defaultMessage="TurboWarp Blocks"
@@ -1557,6 +1594,24 @@ const menuItems = [
         tags: ['dinosaurmod'],
         description: 'Extra Blocks',
         inspiredExt: 'TurboWarp Blocks',
+        featured: true
+    },
+    {
+        name: 'Device Motion',
+        extensionId: 'https://extensions.penguinmod.com/extensions/gaimerI17/DeviceMotion.js',
+        iconURL: 'https://extensions.penguinmod.com/images/gaimerI17/DeviceMotion.avif',
+        tags: ['penguinmod', 'hardware'],
+        description: 'Use Device Motion API to get rotation or movement of the device. Works best on mobile devices.',
+        extDeveloper: 'gaimerI',
+        featured: true
+    },
+    {
+        name: 'MIDI Controller',
+        extensionId: 'https://extensions.penguinmod.com/extensions/electricfuzzball_pm/MIDI.js',
+        iconURL: 'https://extensions.penguinmod.com/images/electricfuzzball_pm/MIDI.svg',
+        tags: ['penguinmod', 'hardware'],
+        description: 'Use a MIDI keyboard to interact with projects!',
+        extDeveloper: 'FloppyDisk-OSC',
         featured: true
     },
     {
@@ -1780,7 +1835,7 @@ const menuItems = [
     },
     {
         name: 'SharkPool\'s Extension Collection',
-        href: 'https://sharkpools-extensions.vercel.app/?originPM=true',
+        href: 'https://sharkpool-sp.github.io/SharkPools-Extensions/?originPM=true',
         extensionId: 'special_sharkpoolExtensionLibrary',
         iconURL: 'https://studio.penguinmod.com/static/assets/93259f95026260bc06f83d29d3b89115.svg',
         description: 'Tons of extensions created by SharkPool.\n\nClick on an extension while this menu is open to add it to your project.',

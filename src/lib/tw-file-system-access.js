@@ -1,4 +1,5 @@
 /**
+ * https://github.com/TurboWarp/scratch-gui/commit/a388c444280ac2a480ba46499be44f06fdcc6206
  * Chromium 157 on Windows cancels the new file pickers with an AbortError if the file dialog
  * fully covers the browser window (e.g. the user maximized it), even after the user picks a file.
  * Other platforms don't mark the browser window as occluded by its own file dialog.

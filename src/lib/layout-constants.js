@@ -54,7 +54,7 @@ const STAGE_DISPLAY_SCALES = {};
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.large] = 1; // large mode, wide browser (standard)
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.largeConstrained] = 0.85; // large mode but narrow browser
 STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.small] = 0.5; // small mode, regardless of browser size
-STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.none] = 0; // none mode, regardless of browser size
+STAGE_DISPLAY_SCALES[STAGE_DISPLAY_SIZES.none] = 0.01; // none mode, regardless of browser size
 
 export default {
     fullSizeMinWidth: 1096,

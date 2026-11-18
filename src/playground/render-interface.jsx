@@ -47,7 +47,9 @@ import runAddons from '../addons/entry';
 import styles from './interface.css';
 import restore from './restore.js';
 
-import {APP_NAME} from '../lib/brand.js'
+import {APP_NAME} from '../lib/brand.js';
+
+import {hasChromium157FilePickerBug} from '../lib/tw-file-system-access';
 
 const urlparams = new URLSearchParams(location.search);
 const restoring = urlparams.get('restore');
@@ -387,6 +389,15 @@ class Interface extends React.Component {
                                         This project is currently under review.
                                         Content may not be suitable for all ages,
                                         and you should be careful when running the project.
+                                    </p>
+                                </div>
+                            )}
+                            {(hasChromium157FilePickerBug()) && (
+                                <div className={styles.remixWarningBox}>
+                                    <p>
+                                        The latest version of Chrome and Edge has a bug that broke our open and save file dialogs.
+                                        Until they fix it, saving projects will always download a new copy of your project instead of overwriting the original file.
+                                        (Folders don't work for now)
                                     </p>
                                 </div>
                             )}

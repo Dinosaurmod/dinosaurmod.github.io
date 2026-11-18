@@ -39,6 +39,7 @@ const StageComponent = props => {
     const transformStyle = stageDimensions.width < minWidth && !isFullScreen ? {
         transform: `translateX(${(minWidth - stageDimensions.width) / 2}px)`
     } : {};
+    const isHidden = minWidth == 4.8;
 
     return (
         <React.Fragment>
@@ -54,7 +55,8 @@ const StageComponent = props => {
                 <Box
                     className={classNames(
                         styles.stage,
-                        {[styles.fullScreen]: isFullScreen}
+                        {[styles.fullScreen]: isFullScreen},
+                        {[styles.stageHidden]: isHidden}
                     )}
                     style={{
                         height: stageDimensions.height,
