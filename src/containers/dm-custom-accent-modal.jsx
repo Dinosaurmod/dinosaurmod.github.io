@@ -77,7 +77,7 @@ class CustomAccentModal extends React.Component {
             onActivated={(accentData, refreshUI) => {this.activateAccent(accentData, refreshUI)}}
             onDeactivated={(accentData, refreshUI) => {this.deactivateAccent(accentData, refreshUI)}}
         />)
-        /*persistThemeCustom({
+        /*persistAccentCustom({
             primaryColor: accentData.primaryColor,
             primaryColorDark: accentData.primaryColorDark
         })
@@ -92,7 +92,7 @@ class CustomAccentModal extends React.Component {
     }
     activateAccent (accentData, refreshUI) {
         //localStorage.setItem(this.CUSTOM_ACCENTS_KEY_ON, JSON.stringify(JSON.parse(localStorage.getItem(this.CUSTOM_ACCENTS_KEY_ON)).push(accentData)))
-        persistThemeCustom({
+        persistAccentCustom({
             primaryColor: accentData.primaryColor,
             primaryColorDark: accentData.primaryColorDark
         })

@@ -144,7 +144,10 @@ const AccentThemeMenu = ({
                     isSelected={item == "custom" ? (localStorage ? localStorage.getItem("tw:accent:isCustom") == true : false) : theme.accent === item}
                     hasIcon={item == "custom" ? false : true}
                     // eslint-disable-next-line react/jsx-no-bind
-                    onClick={item == "custom" ? () => {onCustomAccent()} : () => {onChangeTheme(theme.set(item))}}
+                    onClick={item == "custom" ? () => {onCustomAccent()} : () => {onChangeTheme(theme
+                        .set('accent', item)
+                        .set('gui', localStorage.getItem("tw:theme"))
+                    )}}
                 />
             ))}
         </Submenu>
