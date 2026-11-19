@@ -106,6 +106,14 @@ const getAllRootItems = function (includeGuides) {
     return allItems;
 };
 
+const onUpdateImage = function () {
+    const tool = paper.tool;
+
+    if (typeof tool.onUpdateImage === "function") {
+        tool.onUpdateImage();
+    }
+}
+
 export {
     _getLayer,
     getRaster,
@@ -114,5 +122,6 @@ export {
     getHitBounds,
     trim_,
     getTrimmedRaster,
-    getAllRootItems
+    getAllRootItems,
+    onUpdateImage
 }

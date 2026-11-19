@@ -1,4 +1,4 @@
-import {getTrimmedRaster, getAllRootItems} from './paper-functions.js'
+import {getTrimmedRaster, getAllRootItems, onUpdateImage} from './paper-functions.js'
 
 export default async ({ addon, console, msg }) => {
   const types = ["costume"];
@@ -52,6 +52,7 @@ export default async ({ addon, console, msg }) => {
   addon.tab.createEditorContextMenu(
     (ctx) => {
       const previousItems = getAllItems();
+      console.log(previousItems);
       const target = addon.tab.traps.vm.editingTarget;
       target.deleteCostume(ctx.index);
       // when a costume is deleted, it automatically goes to the costume below the deleted costume so no extra code is needed
@@ -75,6 +76,7 @@ export default async ({ addon, console, msg }) => {
       }
 
       queueMicrotask(() => {
+        onUpdateImage();
         addon.tab.traps.vm.emitTargetsUpdate();
         addon.tab.traps.vm.runtime.emitProjectChanged();
         ctx.target.click();

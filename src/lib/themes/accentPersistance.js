@@ -108,8 +108,7 @@ const persistAccentCustom = colors => {
 if (localStorage) {
     const CUSTOM_ACCENTS_ARRAY = JSON.parse(localStorage.getItem(CUSTOM_ACCENTS_KEY)) == 1 ? [] : JSON.parse(localStorage.getItem(CUSTOM_ACCENTS_KEY))
     
-    for (const accentData of (CUSTOM_ACCENTS_ARRAY == [] ? [{ nothing: true }] : CUSTOM_ACCENTS_ARRAY)) {
-        if (accentData.nothing) continue;
+    for (const accentData of CUSTOM_ACCENTS_ARRAY) {
         if (accentData.enabled == true) {
             persistAccentCustom({
                 primaryColor: accentData.colors.primary,
