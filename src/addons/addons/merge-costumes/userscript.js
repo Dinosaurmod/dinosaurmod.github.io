@@ -50,11 +50,15 @@ export default async ({ addon, console, msg }) => {
     }
   ); */
   addon.tab.createEditorContextMenu(
-    (ctx) => {
+    async (ctx) => {
       const previousItems = getAllItems();
       console.log(previousItems);
       const target = addon.tab.traps.vm.editingTarget;
+      const oldPaper = paper.project;
       target.deleteCostume(ctx.index);
+      await new Promise(r => {
+        if (paper.project !== oldPaper) r();
+      })
       // when a costume is deleted, it automatically goes to the costume below the deleted costume so no extra code is needed
       // https://github.com/Dinosaurmod/Dinosaurmod-Paint/blob/develop/src/hocs/copy-paste-hoc.jsx
       let importedItems = [];
@@ -72,7 +76,7 @@ export default async ({ addon, console, msg }) => {
         group.remove();
       }
       for (const item of importedItems) {
-        const placedItem = paper.project.getActiveLayer().addChild(item);
+        paper.project.getActiveLayer().addChild(item);
       }
 
       queueMicrotask(() => {
