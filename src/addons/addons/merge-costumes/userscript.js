@@ -55,6 +55,7 @@ export default async ({ addon, console, msg }) => {
       const target = addon.tab.traps.vm.editingTarget;
       target.deleteCostume(ctx.index);
       // when a costume is deleted, it automatically goes to the costume below the deleted costume so no extra code is needed
+      // https://github.com/Dinosaurmod/Dinosaurmod-Paint/blob/develop/src/hocs/copy-paste-hoc.jsx
       let importedItems = [];
       for (let i = 0; i < previousItems.length; i++) {
         const item = paper.Base.importJSON(previousItems[i]);
@@ -64,7 +65,7 @@ export default async ({ addon, console, msg }) => {
       }
       if (!importedItems.length) return;
       // If pasting a group or non-raster to bitmap, rasterize first
-      if (isBitmap(this.props.format) && !(importedItems.length === 1 && importedItems[0] instanceof paper.Raster)) {
+      if (getPaintFormat() == "BITMAP" && !(importedItems.length === 1 && importedItems[0] instanceof paper.Raster)) {
         const group = new paper.Group(importedItems);
         importedItems = [group.rasterize()];
         group.remove();
