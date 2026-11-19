@@ -3,7 +3,7 @@ const manifest = {
   "enabledByDefault": false,
   "editorOnly": true,
   "name": "Merge costumes",
-  "description": "(DOESN'T WORK YET) Adds options to the right click context menu for costumes to merge the current costume to the costume above or the one below of the list.",
+  "description": "Adds options to the right click context menu for costumes to merge the current costume to the costume below of the list.",
   "tags": ["beta", "new", "dinosaurmod"],
   "userscripts": [
     {

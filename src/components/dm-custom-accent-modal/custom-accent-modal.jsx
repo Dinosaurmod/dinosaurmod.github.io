@@ -76,7 +76,7 @@ const CustomAccentComponent = props => {
         }
     }, 500)
 
-    const setEnabled2 = (value) => {
+    const setEnabled2 = (name, value) => {
         if (!!upForDeletion) {
             setEnabled(false)
         } else {
@@ -84,7 +84,7 @@ const CustomAccentComponent = props => {
             let NEW_CUSTOM_ACCENTS_ARRAY = (CUSTOM_ACCENTS_ARRAY == [] ? [{ nothing: true }] : CUSTOM_ACCENTS_ARRAY)
             for (const accentData of NEW_CUSTOM_ACCENTS_ARRAY) {
                 if (accentData.nothing) continue;
-                if (accentData.name == props.name) {
+                if (accentData.name == name) {
                     accentData.enabled = value
                 } else {
                     accentData.enabled = false
@@ -130,19 +130,19 @@ const CustomAccentComponent = props => {
             onClick={() => {
                 if (!upForDeletion) {
                     if (!!isEnabled) {
-                        setEnabled2(false)
                         props.onDeactivated({
                             name: props.name,
                             primaryColor: props.primaryColor,
                             primaryColorDark: props.primaryColorDark
                         }, props.refreshUI)
+                        setEnabled2(props.name, false)
                     } else {
-                        setEnabled2(true)
                         props.onActivated({
                             name: props.name,
                             primaryColor: props.primaryColor,
                             primaryColorDark: props.primaryColorDark
                         }, props.refreshUI)
+                        setEnabled2(props.name, true)
                     }
                 }
             }}
@@ -191,7 +191,7 @@ const CustomAccentComponent = props => {
                     onClick={async () => {
                         setUpForDeletion(true)
                         await new Promise(r => setTimeout(r, 150))
-                        setEnabled2(false)
+                        setEnabled2(props.name, false)
                         props.onDeactivated({
                             name: props.name,
                             primaryColor: props.primaryColor,
